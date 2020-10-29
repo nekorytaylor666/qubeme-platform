@@ -6,7 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PersonCard = ({ person }) => {
 	const router = useRouter();
-	const { id } = router.query;
+	if (!person) {
+		person = {
+			fullName: 'default',
+		};
+	}
 	return (
 		<div className="container mx-auto shadow-md mt-4  bg-white rounded-xl h-screen relative divide-y-2 divide-gray-400">
 			<div className="flex flex-col justify-center items-center py-4">
@@ -51,15 +55,19 @@ export async function getStaticPaths() {
 	const people = await res.json();
 	// Get the paths we want to pre-render based on posts
 	const paths = people.map((person) => {
-		const id = person.uid ? person.uid.toString() : '';
-		return {
-			params: { id: id },
-		};
+		if (person.uid) {
+			const id = person.uid.toString();
+			return {
+				params: { id: id },
+			};
+		} else {
+			console.log('error', person);
+		}
 	});
 
 	// We'll pre-render only these paths at build time.
 	// { fallback: false } means other routes should 404.
-	return { paths, fallback: true };
+	return { paths, fallback: false };
 }
 
 // This also gets called at build time
