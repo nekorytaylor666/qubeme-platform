@@ -66,9 +66,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const { id } = params;
 	console.log(id);
-	const url = `https://us-central1-businesscardapp-d89e9.cloudfunctions.net/user?id=${id}`;
+	const url = `http://localhost:3000/api/person/${id}`;
 	const res = await fetch(url);
 	const person = await res.json();
+
 	return {
 		props: {
 			person,
