@@ -34,6 +34,7 @@ const PersonCardPage = ({ person }) => {
 // 	const { id } = params;
 // 	console.log(id);
 // 	const url = `http://localhost:3000/api/person/${id}`;
+// 	// const url = `https://us-central1-businesscardapp-d89e9.cloudfunctions.net/user?id=${id}`;
 // 	const res = await fetch(url);
 // 	const person = await res.json();
 
@@ -50,6 +51,7 @@ export async function getServerSideProps({ params }) {
 	const url = `https://us-central1-businesscardapp-d89e9.cloudfunctions.net/user?id=${id}`;
 	const res = await fetch(url);
 	const person = await res.json();
+	console.log(person);
 	return {
 		props: {
 			person,

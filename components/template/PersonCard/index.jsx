@@ -10,7 +10,7 @@ const PersonCard = ({ person }) => {
 				<Image className="relative w-16 shadow-md object-cover rounded-xl" width={120} height={120} src="/guy.jpeg"></Image>
 				<div className="h-6"></div>
 				<h1 className="font-serif text-4xl text-center">{person.fullName}</h1>
-				<p className="font-sans font-light text-base text-center text-gray-600">New york, USA</p>
+				<p className="font-sans font-light text-base text-center text-gray-600">{person.location}</p>
 				<div className="h-4"></div>
 				<a>
 					<div className="flex ">
@@ -29,7 +29,7 @@ const PersonCard = ({ person }) => {
 				<div className="h-2"></div>
 
 				<a>
-					<div className="flex ">
+					<div className="flex">
 						<FontAwesomeIcon icon={faTelegramPlane} className="text-2xl"></FontAwesomeIcon>
 						<div className="w-2"></div>
 						<span>@{person.telegram}</span>
