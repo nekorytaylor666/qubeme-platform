@@ -12,7 +12,7 @@ export const validateToken = async (token) => {
 				Authorization: JSON.stringify({ token: token }),
 			};
 			console.log('variables:', dev, server, public_url);
-			const url = `${server}/api/validate`;
+			const url = `${server}/api/validate/`;
 			console.log('api url:', url);
 			const result = await fetch(url, { headers }).then((res) => res.json());
 			return result;
