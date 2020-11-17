@@ -8,7 +8,7 @@ import { db } from '../../utils/firebaseClient';
 
 const EditPage = ({ user }) => {
 	const router = useRouter();
-	console.log(user);
+
 	useEffect(() => {
 		if (!user) {
 			router.push('/signin');
