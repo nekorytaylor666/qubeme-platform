@@ -1,9 +1,20 @@
+import cookies from 'next-cookies';
+import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import QbInput from '../../components/atom/QbInput';
+import { validateToken } from '../../utils/auth/validateToken';
 import { db } from '../../utils/firebaseClient';
 
 const EditPage = ({ user }) => {
+	const router = useRouter();
+	console.log(user);
+	useEffect(() => {
+		if (!user) {
+			router.push('/signin');
+		}
+	}, [user]);
+
 	const [userData, setUserData] = useState(null);
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
