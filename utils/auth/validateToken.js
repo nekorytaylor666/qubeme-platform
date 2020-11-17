@@ -11,6 +11,7 @@ export const validateToken = async (token) => {
 				'Context-Type': 'application/json',
 				Authorization: JSON.stringify({ token: token }),
 			};
+			console.log('url:', public_url);
 			const result = await fetch(`${server}/api/validate`, { headers }).then((res) => res.json());
 
 			return result;
