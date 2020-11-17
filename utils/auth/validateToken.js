@@ -14,7 +14,7 @@ export const validateToken = async (token) => {
 			console.log('variables:', dev, server, public_url);
 			const url = `${server}/api/validate/`;
 			console.log('api url:', url);
-			const result = await fetch(url, { headers }).then((res) => res.json());
+			const result = await fetch(url, { headers, mode: 'cors' }).then((res) => res.json());
 			return result;
 		} catch (e) {
 			throw e;
