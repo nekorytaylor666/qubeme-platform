@@ -2,7 +2,7 @@ export const validateToken = async (token) => {
 	const dev = process.env.NODE_ENV === 'development';
 	const public_url = process.env.VERCEL_URL;
 
-	const server = dev ? 'http://localhost:3000' : public_url;
+	const server = dev ? 'http://localhost:3000' : 'https://qubeme-platform-3q8lgcbqq.vercel.app';
 
 	// If token exists run Firebase validation on server side before rendering.
 	if (token) {
