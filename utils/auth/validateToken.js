@@ -11,9 +11,10 @@ export const validateToken = async (token) => {
 				'Context-Type': 'application/json',
 				Authorization: JSON.stringify({ token: token }),
 			};
-			console.log('url:', dev, server, public_url);
-			const result = await fetch(`${server}/api/validate`, { headers }).then((res) => res.json());
-
+			console.log('variables:', dev, server, public_url);
+			const url = `${server}/api/validate`;
+			console.log('api url:', url);
+			const result = await fetch(url, { headers }).then((res) => res.json());
 			return result;
 		} catch (e) {
 			throw e;
