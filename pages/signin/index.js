@@ -2,73 +2,72 @@ import { auth } from '../../utils/firebaseClient';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../auth/useAuth';
+import QbInputLabel from '../../components/atom/QbInputLabel';
+import QbSubmit from '../../components/atom/QbSubmit';
+import { useAuth } from '../../context/UserContext';
 
 const SignIn = () => {
 	const router = useRouter();
-	const { user, setUser } = useAuth();
-	const SignInUser = async (email, pass) => {
-		let cred = null;
-		try {
-			cred = await auth.signInWithEmailAndPassword(email, pass);
-		} catch (error) {
-			cred = null;
-		}
-		return cred;
-	};
+	const { emailLogin } = useAuth();
 
-	const onSubmit = async (data) => {
-		const creds = await SignInUser(data.email, data.password);
-		console.log(creds);
-		if (creds === null) {
-			alert('No such user');
-			return;
-		}
-		setUser(creds);
-		router.push('/edit');
-		console.log(data);
+	const onSubmit = (data) => {
+		emailLogin(data.email, data.password)
+			.then(() => {
+				router.push('/edit');
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	const { register, handleSubmit, watch, errors } = useForm();
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-			<div className="mb-4">
-				<label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-					Email
-				</label>
-				<input
-					name="email"
-					className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-					id="username"
-					type="email"
-					placeholder="Username"
-					ref={register({ required: true })}
-				/>
+		<div className="container mx-auto">
+			<div className="flex flex-col items-center mt-16 ">
+				<img className="w-2/3 md:w-1/4 h-auto mb-8" src="/login.svg" alt="login"></img>
+				<form onSubmit={handleSubmit(onSubmit)} className="w-full md:w-2/3 lg:w-1/3 space-y-8 mb-16 px-8 p-4">
+					<QbInputLabel
+						icon={
+							<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+							</svg>
+						}
+						name="email"
+						label="Email"
+						type="text"
+						placeholder="Input your login..."
+						required
+						register={register}></QbInputLabel>
+					<QbInputLabel
+						icon={
+							<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+							</svg>
+						}
+						name="password"
+						label="Password"
+						type="password"
+						placeholder="Input your password..."
+						required
+						register={register}></QbInputLabel>
+					<QbSubmit></QbSubmit>
+				</form>
+				<div className="flex justify-center space-x-2">
+					<a href="#">Sign up</a>
+					<img src="/circle.svg" alt="circle"></img>
+					<a href="#">Forgot password?</a>
+				</div>
 			</div>
-			<div className="mb-6">
-				<label className="block text-grey-darker text-sm font-bold mb-2" for="password">
-					Password
-				</label>
-				<input
-					name="password"
-					className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-					id="password"
-					type="password"
-					placeholder="******************"
-					ref={register({ required: true })}
-				/>
-				<p className="text-red text-xs italic">Please choose a password.</p>
-			</div>
-			<div className="flex items-center justify-between">
-				<button className="bg-blue-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="submit">
-					Sign In
-				</button>
-				<a className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
-					Forgot Password?
-				</a>
-			</div>
-		</form>
+		</div>
 	);
 };
 

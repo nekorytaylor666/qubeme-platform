@@ -1,40 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../auth/useAuth';
 import QbInput from '../../components/atom/QbInput';
 import { db } from '../../utils/firebaseClient';
 
-const EditPage = () => {
-	const { user, authenticated, loadingAuthState } = useAuth();
+const EditPage = ({ user }) => {
 	const [userData, setUserData] = useState(null);
-
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
 			...userData,
 		},
 	});
 
-	const fetchUserInfo = async (user, authenticated) => {
-		console.log(authenticated, user);
-		if (!authenticated) {
-			return;
-		}
-
-		const doc = user && (await db.collection('users').doc(user.uid).get());
-
-		if (doc && doc.exists) {
-			const data = doc.data();
-			console.log(data);
-			setUserData(data);
-		}
-	};
-
-	useEffect(() => {
-		fetchUserInfo(user, authenticated);
-	}, []);
-
 	const onSubmit = async (data) => {
-		console.log(data);
 		const { fullName, bio, phoneNumber } = data;
 		try {
 			const newUserRef = await db
@@ -75,7 +52,7 @@ const EditPage = () => {
 					icon={
 						<svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path
-								strokeLinecap="round"
+								Linecap="round"
 								strokeLinejoin="round"
 								strokeWidth={2}
 								d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"

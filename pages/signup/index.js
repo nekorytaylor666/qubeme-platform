@@ -14,7 +14,6 @@ const SignUp = () => {
 		} catch (error) {
 			cred = null;
 		}
-		console.log('cred', cred);
 		return cred;
 	};
 
