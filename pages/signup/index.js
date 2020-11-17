@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../auth/useAuth';
 import { auth, db } from '../../utils/firebaseClient';
 const SignUp = () => {
 	const router = useRouter();
