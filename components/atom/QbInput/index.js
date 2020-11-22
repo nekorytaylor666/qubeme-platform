@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QbInput = ({ placeholder, name, icon, register, required }) => {
+const QbInput = ({ placeholder, name, icon, register, required, defaultValue }) => {
 	return (
 		<div>
 			<div className="flex items-center border-b-2 border-black  py-2 ">
@@ -11,6 +11,7 @@ const QbInput = ({ placeholder, name, icon, register, required }) => {
 					placeholder={placeholder}
 					aria-label={name}
 					name={name}
+					defaultValue={defaultValue}
 					ref={register({ required })}
 				/>
 			</div>

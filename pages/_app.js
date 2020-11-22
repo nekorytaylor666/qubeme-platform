@@ -3,7 +3,35 @@ import fetch from 'isomorphic-unfetch';
 import cookies from 'next-cookies';
 import UserProvider from '../context/UserContext';
 import App from 'next/app';
-
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+	faBehance,
+	faDribbble,
+	faFacebook,
+	faGithub,
+	faInstagram,
+	faLinkedin,
+	faSnapchat,
+	faTelegram,
+	faTwitter,
+	faVk,
+	faWhatsapp,
+	faYoutube,
+} from '@fortawesome/free-brands-svg-icons';
+library.add({
+	faBehance,
+	faDribbble,
+	faFacebook,
+	faGithub,
+	faInstagram,
+	faLinkedin,
+	faSnapchat,
+	faTelegram,
+	faTwitter,
+	faVk,
+	faWhatsapp,
+	faYoutube,
+});
 function MyApp({ user, Component, pageProps }) {
 	return (
 		<UserProvider>
@@ -26,10 +54,8 @@ MyApp.getInitialProps = async (appContext) => {
 					'Context-Type': 'application/json',
 					Authorization: JSON.stringify({ token: token }),
 				};
-				console.log('variables:', dev, server, public_url);
 				// const url = `${server}/api/validate/`;
 				const url = `https://us-central1-businesscardapp-d89e9.cloudfunctions.net/app/validate`;
-				console.log('api url:', url);
 				const result = await fetch(url, { headers }).then((res) => res.json());
 				return result;
 			} catch (e) {
@@ -47,7 +73,6 @@ MyApp.getInitialProps = async (appContext) => {
 		// If token exists run Firebase validation on server side before rendering.
 
 		const result = await validateToken(firebaseToken);
-		console.log(result);
 		const props = { ...result, ...appProps };
 		return { ...props };
 	} catch (error) {

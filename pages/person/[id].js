@@ -30,7 +30,7 @@ const PersonCardPage = ({ person }) => {
 // }
 
 // // This also gets called at build time
-// export async function getStaticProps({ params }) {
+// export async function getStaticProps({ paramsH2HDPqDSjhWKtmePZKjEUa0fQIA3 }) {
 // 	const { id } = params;
 // 	console.log(id);
 // 	const url = `http://localhost:3000/api/person/${id}`;
@@ -47,7 +47,7 @@ const PersonCardPage = ({ person }) => {
 
 export async function getServerSideProps({ params }) {
 	const { id } = params;
-	const url = `https://us-central1-businesscardapp-d89e9.cloudfunctions.net/user?id=${id}`;
+	const url = `https://us-central1-businesscardapp-d89e9.cloudfunctions.net/app/user?id=${id}`;
 	const res = await fetch(url);
 	const person = await res.json();
 	return {

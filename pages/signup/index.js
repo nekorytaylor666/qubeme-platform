@@ -2,39 +2,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../context/UserContext';
 import { auth, db } from '../../utils/firebaseClient';
 const SignUp = () => {
 	const router = useRouter();
-	const { setUser } = useAuth();
+	const { signUpEmailLogin } = useAuth();
 	const SignUpUser = async (email, pass) => {
-		let cred = null;
-		try {
-			cred = await auth.createUserWithEmailAndPassword(email, pass);
-		} catch (error) {
-			cred = null;
-		}
-		return cred;
+		await signUpEmailLogin(email, pass);
 	};
 
 	const onSubmit = async (data) => {
 		const { fullname, email, password, bio } = data;
-		try {
-			const creds = await SignUpUser(email, password);
-			const newUserRef = await db.collection('users').doc(creds.user.uid).set({
-				fullName: fullname,
-				bio,
-				version: '2',
-			});
 
-			if (creds === null) {
-				alert('Some error try again later');
-				return;
-			}
+		await SignUpUser(email, password);
 
-			setUser(creds);
-		} catch (error) {
-			return alert('error');
-		}
 		router.push('/edit');
 	};
 
