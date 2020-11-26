@@ -18,6 +18,8 @@ import {
 	faWhatsapp,
 	faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+
 library.add({
 	faBehance,
 	faDribbble,
@@ -31,6 +33,7 @@ library.add({
 	faVk,
 	faWhatsapp,
 	faYoutube,
+	faGlobe,
 });
 function MyApp({ user, Component, pageProps }) {
 	return (

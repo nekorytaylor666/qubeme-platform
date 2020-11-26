@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/firebase-storage';
 
 var firebaseConfig = {
 	apiKey: 'AIzaSyD5kL5_ko8L_yzzU4Anniqg8nkPtExMtEA',
@@ -23,3 +24,4 @@ if (!firebase.apps.length) {
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const storage = firebase.storage();

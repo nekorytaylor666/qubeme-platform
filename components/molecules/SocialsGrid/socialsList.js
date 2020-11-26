@@ -12,8 +12,10 @@ import {
 	faWhatsapp,
 	faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 const socialsList = [
+	{ type: 'site', icon: faGlobe },
 	{
 		type: 'telegram',
 		icon: faTelegram,
