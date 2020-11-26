@@ -64,7 +64,7 @@ const EditPage = ({ user }) => {
 
 	return (
 		<div className="my-16">
-			<EditPerson onSubmit={onSubmit} userData={userData} onImageUpload={onImageUpload} avatar={avatar}></EditPerson>
+			<EditPerson onSubmit={onSubmit} userData={userData} onImageUpload={onImageUpload} avatar={avatar} loading={loading}></EditPerson>
 		</div>
 	);
 };

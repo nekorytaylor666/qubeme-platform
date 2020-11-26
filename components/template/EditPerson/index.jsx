@@ -10,8 +10,9 @@ import SocialsGrid from '../../molecules/SocialsGrid';
 import { getIconFromSocial } from '../../molecules/SocialsGrid/socialsList';
 import Image from 'next/image';
 import { storage } from '../../../utils/firebaseClient';
+import QbSpinner from '../../atom/QbSpinner';
 
-export const EditPerson = ({ onSubmit, userData, onImageUpload, avatar }) => {
+export const EditPerson = ({ onSubmit, userData, onImageUpload, avatar, loading }) => {
 	const currentSocials = userData && userData.socials;
 	const [showSocialGrid, setShowSocialGrid] = useState(false);
 	const { register, control, handleSubmit, reset, trigger, setError, setValue, getValues } = useForm();
@@ -64,7 +65,9 @@ export const EditPerson = ({ onSubmit, userData, onImageUpload, avatar }) => {
 		setShowSocialGrid(false);
 	};
 
-	return (
+	return loading ? (
+		<QbSpinner></QbSpinner>
+	) : (
 		<div className="container mx-auto">
 			<form onSubmit={onImageUpload && handleSubmit(onImageUpload)}>
 				<img width={120} height={120} src={avatar} alt="avatar" />
