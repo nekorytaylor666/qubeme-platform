@@ -21,7 +21,7 @@ export const EditPerson = ({ onSubmit, userData, onImageUpload, avatar, loading 
 
 		if (userData) {
 			const { socials } = userData;
-			reset(userData);
+			reset({ ...userData, avatar: '' });
 			setValue('socials', socials);
 		}
 	}, [userData]);
@@ -65,12 +65,16 @@ export const EditPerson = ({ onSubmit, userData, onImageUpload, avatar, loading 
 		setShowSocialGrid(false);
 	};
 
+	const handleFileChange = (e) => {
+		setValue('avatar', e.target.value.files); // you get all the files object here
+	};
+
 	return loading ? (
 		<QbSpinner></QbSpinner>
 	) : (
 		<div className="container mx-auto">
 			<form onSubmit={onImageUpload && handleSubmit(onImageUpload)}>
-				<img width={120} height={120} src={avatar} alt="avatar" />
+				<img width={120} height={120} src={avatar ? avatar : '/guy.jpeg'} alt="avatar" />
 				<input type="file" name="avatar" id="avatar" ref={register} />
 				<input type="submit" value="Save" />
 			</form>

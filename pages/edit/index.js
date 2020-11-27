@@ -45,7 +45,6 @@ const EditPage = ({ user }) => {
 		}).then(function (response) {
 			return response.json();
 		});
-		console.log('submitted:', result);
 		if (result.error) {
 			return console.log(result.error);
 		}
@@ -53,11 +52,15 @@ const EditPage = ({ user }) => {
 	};
 
 	const onImageUpload = async (data) => {
+		console.log('upload started');
 		const file = data.avatar[0];
 		const userAvatarPath = `users/${user.uid}/${file.name}`;
 		const fileRef = storage.ref().child(userAvatarPath);
-		fileRef.put(file).then(() => {
-			alert('file uploaded');
+		fileRef.put(file).then((snapshot) => {
+			snapshot.ref.getDownloadURL().then((url) => {
+				setAvatar(url);
+				console.log('upload finished');
+			});
 		});
 		db.collection('users').doc(user.uid).update({ avatar: userAvatarPath });
 	};
