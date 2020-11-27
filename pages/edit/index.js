@@ -68,6 +68,11 @@ const EditPage = ({ user }) => {
 	return (
 		<div className="my-16">
 			<EditPerson onSubmit={onSubmit} userData={userData} onImageUpload={onImageUpload} avatar={avatar} loading={loading}></EditPerson>
+			{loading ? null : (
+				<div className="flex justify-center mt-4">
+					<p className="text-gray-400 text-base">UID: {user.uid}</p>
+				</div>
+			)}
 		</div>
 	);
 };
