@@ -83,7 +83,7 @@ const PersonCard = ({ person, avatar, avatarLoading }) => {
 				<div className="h-2"></div>
 
 				<h3 className="font-sans text-2xl font-bold ml-4">Socials</h3>
-				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-8">
 					{info.socials.map(getSocialComponentFromSocial)}
 				</div>
 			</div>
