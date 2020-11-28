@@ -1,6 +1,11 @@
 import React from 'react';
-const QbSpinner = () => {
-	return (
+const QbSpinner = ({ mini }) => {
+	return mini ? (
+		<div className="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+	) : (
 		<div className="flex flex-col justify-center items-center h-screen">
 			<div className="lds-ripple">
 				<div></div>

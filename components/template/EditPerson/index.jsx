@@ -75,7 +75,7 @@ export const EditPerson = ({ onSubmit, userData, onImageUpload, avatar, loading 
 	) : (
 		<div className="container mx-auto">
 			<form onSubmit={onImageUpload && handleSubmit(onImageUpload)} className="flex flex-col justify-center items-center ">
-				<label htmlFor="avatar" className="cursor-pointer flex justify-center relative">
+				<label htmlFor="avatar" className="cursor-pointer flex justify-center relative ">
 					<img
 						className=" w-64 h-64 object-cover rounded-xl shadow-xl border-4 border-black"
 						src={avatarUrl ? avatarUrl : '/guy.jpeg'}
