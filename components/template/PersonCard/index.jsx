@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { faTelegramPlane, faFacebookSquare, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QbSpinner from '../../atom/QbSpinner';
-import { faBriefcase, faEnvelope, faEnvelopeOpenText, faLocationArrow, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faBriefcase, faEnvelope, faEnvelopeOpenText, faLocationArrow, faPhone, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { getLinkFromSocial } from '../../../utils/socials';
 import { getIconFromSocial } from '../../molecules/SocialsGrid/socialsList';
 
@@ -66,6 +66,14 @@ const PersonCard = ({ person, avatar, avatarLoading }) => {
 								<FontAwesomeIcon icon={faEnvelopeOpenText}></FontAwesomeIcon>
 								<div className="w-2"></div>
 								<span>{person.email}</span>
+							</div>
+						</a>
+					</div>
+					<div className="mt-4">
+						<a href={`https://us-central1-businesscardapp-d89e9.cloudfunctions.net/app/vcard/${person.uid}`}>
+							<div className="rounded-full bg-black text-white font-bold text-xl w-full px-4 py-2 cursor-pointer shadow-md">
+								<span className="mr-2">Add to contacts</span>
+								<FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
 							</div>
 						</a>
 					</div>
